@@ -11,13 +11,13 @@
     <template v-if="dinos.length > 0"><h4>Dinosaur List</h4>
       <ul>
         <li v-for="(d, i) in dinos">
-          <!--<keep-alive>-->
-          <!--<component v-bind:is="currentView"-->
-          <!--v-bind:name="d.text"-->
-          <!--v-bind:initial-quantity="d.quantity"-->
-          <!--v-bind:diet="d.diet"-->
-          <!--@increment="incrementTotal"></component>-->
-          <!--</keep-alive>-->
+          <keep-alive>
+            <component v-bind:is="currentView"
+                       v-bind:name="d.text"
+                       v-bind:initial-quantity="d.quantity"
+                       v-bind:diet="d.diet"
+                       @increment="incrementTotal"></component>
+          </keep-alive>
           <button v-on:click="deleteDino(i)">Make Extinct</button>
           <span v-bind:title="message">The {{ d.text | undercase }} weighs {{ d.weight }}.</span>
           <br>
@@ -35,6 +35,8 @@
 
 <script>
   import _ from 'lodash'
+  import dinoEdit from './dinoEdit'
+  import dinoShow from './dinoView'
 
   export default {
     data: function () {
@@ -112,11 +114,11 @@
     watch: {
       dino: _.debounce(() => { this.buttonText = this.dino !== '' ? `Add ${this.dino}` : `Add Dinosaur` }
         , 250)
+    },
+    components: {
+      'dino-counter': dinoEdit,
+      'dino-show': dinoShow
     }
-//    components: {
-//      'dino-counter': dinoEdit,
-//      'dino-show': dinoShow,
-//    }
   }
 </script>
 
