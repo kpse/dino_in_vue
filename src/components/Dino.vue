@@ -13,9 +13,7 @@
         <li v-for="(d, i) in dinos">
           <keep-alive>
             <component v-bind:is="currentView"
-                       v-bind:name="d.text"
-                       v-bind:initial-quantity="d.quantity"
-                       v-bind:diet="d.diet"
+                       v-bind:dino="d"
                        @increment="incrementTotal"></component>
           </keep-alive>
           <button v-on:click="deleteDino(i)">Make Extinct</button>

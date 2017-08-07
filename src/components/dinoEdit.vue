@@ -1,23 +1,21 @@
 <template>
   <div>
-    <button v-on:click="increment">{{quantity}}</button>
-    {{ name | capitalize }}
+    <button v-on:click="increment">{{dino.quantity}}</button>
+    {{ dino.text | capitalize }}
   </div>
 </template>
 
 <script>
   export default {
-    template: '#dino-counter',
-    props: ['name', 'initialQuantity'],
+    props: ['dino'],
     data: function () {
-      this.$emit('increment', this.initialQuantity)
-      return {
-        quantity: this.initialQuantity
-      }
+      this.$emit('increment', this.dino.quantity)
+      console.log(`dino is ${JSON.stringify(this.dino)}`)
+      return this.dino
     },
     methods: {
       increment: function () {
-        this.quantity += 1
+        this.dino.quantity += 1
         this.$emit('increment', 1)
       }
     },
